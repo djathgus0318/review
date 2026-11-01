@@ -5,4 +5,5 @@ export function heightAt(scene,x,z,previousHeight=0){
  if(z>=-4&&z<=-2&&x>=-1&&x<=5&&previousHeight>=6.4)return 6.8;
  return 0;
 }
-export const actions=['idle','walk','swim','castle','dig','climb','drink','lie'];
+export const actions=['idle','walk','swim','castle','dig','climb','drink','lie','sitCoffee'];
+export const cafeChairs=[{id:0,x:-9.35,z:8,rotation:Math.PI/2},{id:1,x:-6.65,z:8,rotation:-Math.PI/2}];
