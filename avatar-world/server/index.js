@@ -1,9 +1,10 @@
+import {clientOrigins} from '../shared/connection.js';
 import {heightAt} from '../shared/world.js';
 import {createServer} from 'node:http';
 import {Server} from 'socket.io';
 import {profile,movement,scenes} from './world.js';
 const http=createServer((req,res)=>{res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({status:'ok',players:players.size}));});
-const io=new Server(http,{cors:{origin:process.env.CLIENT_ORIGIN?.split(',')||['http://localhost:5173','http://127.0.0.1:5173']}});
+const io=new Server(http,{cors:{origin:clientOrigins(process.env.CLIENT_ORIGIN)}});
 const players=new Map();
 function broadcast(){for(const scene of scenes)io.to(scene).emit('players',[...players.values()].filter(p=>p.scene===scene));}
 io.on('connection',socket=>{
